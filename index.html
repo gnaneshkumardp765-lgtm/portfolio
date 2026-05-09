@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Gnanesh Kumar D.P · Cinematic Dev Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: radial-gradient(circle at 10% 20%, #0a0c12, #030508);
+      color: #eef2ff;
+      line-height: 1.5;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    /* custom scrollbar */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #0f1119; }
+    ::-webkit-scrollbar-thumb { background: #4f46e5; border-radius: 10px; }
+
+    /* glassmorphism + neumorphism mix */
+    .glass-card {
+      background: rgba(15, 20, 30, 0.55);
+      backdrop-filter: blur(12px);
+      border-radius: 2rem;
+      border: 1px solid rgba(79, 70, 229, 0.25);
+      box-shadow: 0 20px 35px -12px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.05);
+      transition: all 0.25s ease;
+    }
+
+    .glass-card:hover {
+      border-color: rgba(79, 70, 229, 0.6);
+      box-shadow: 0 25px 40px -12px rgba(79, 70, 229, 0.2);
+    }
+
+    /* container */
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* sticky nav */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(3, 5, 12, 0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(79, 70, 229, 0.3);
+      transition: all 0.2s;
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .logo {
+      font-weight: 800;
+      font-size: 1.6rem;
+      background: linear-gradient(135deg, #c084fc, #4f46e5);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      letter-spacing: -0.02em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      color: #e2e8f0;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: 0.2s;
+      position: relative;
+    }
+    .nav-links a:hover, .nav-links a.active {
+      color: #a78bfa;
+    }
+    .nav-links a.active::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, #a78bfa, #4f46e5);
+      border-radius: 2px;
+    }
+
+    /* progress bar */
+    .progress-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: transparent;
+      z-index: 200;
+    }
+    .progress-bar {
+      height: 3px;
+      background: linear-gradient(90deg, #c084fc, #4f46e5);
+      width: 0%;
+      transition: width 0.08s linear;
+    }
+
+    /* hero cinematic */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+    }
+    .glow-text {
+      font-size: 3.8rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, #FFFFFF 20%, #c084fc 60%, #4f46e5 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .typed-cursor {
+      font-size: 3rem;
+      color: #a78bfa;
+    }
+    .hero-badge {
+      background: rgba(79, 70, 229, 0.2);
+      border-radius: 40px;
+      padding: 0.35rem 1rem;
+      display: inline-block;
+      font-size: 0.85rem;
+      border: 1px solid rgba(167, 139, 250, 0.5);
+    }
+    /* animated bg elements */
+    .bg-motion {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 0;
+    }
+    .bg-motion span {
+      position: absolute;
+      width: 250px;
+      height: 250px;
+      background: radial-gradient(circle, rgba(79,70,229,0.2) 0%, rgba(0,0,0,0) 70%);
+      border-radius: 50%;
+      animation: float 18s infinite;
+    }
+    @keyframes float {
+      0% { transform: translate(0, 0) scale(1); opacity: 0.3; }
+      50% { transform: translate(40px, -30px) scale(1.05); opacity: 0.6; }
+      100% { transform: translate(-20px, 20px) scale(1); opacity: 0.3; }
+    }
+    /* sections */
+    section {
+      padding: 5rem 0;
+      position: relative;
+    }
+    .section-title {
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin-bottom: 2.5rem;
+      display: inline-block;
+      background: linear-gradient(120deg, #fff, #b9a9ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      border-left: 5px solid #4f46e5;
+      padding-left: 1rem;
+    }
+
+    /* skills animated bars */
+    .skill-item {
+      margin-bottom: 1.5rem;
+    }
+    .skill-info {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.5rem;
+    }
+    .skill-bar-bg {
+      background: #1e1f2c;
+      border-radius: 20px;
+      height: 8px;
+      overflow: hidden;
+    }
+    .skill-bar-fill {
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg, #818cf8, #c084fc);
+      border-radius: 20px;
+      transition: width 1s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    /* timeline */
+    .timeline {
+      position: relative;
+      padding-left: 2rem;
+    }
+    .timeline-item {
+      position: relative;
+      margin-bottom: 2rem;
+    }
+    .timeline-dot {
+      position: absolute;
+      left: -1.2rem;
+      top: 0.3rem;
+      width: 12px;
+      height: 12px;
+      background: #4f46e5;
+      border-radius: 50%;
+      box-shadow: 0 0 0 4px rgba(79,70,229,0.3);
+    }
+    .timeline-content {
+      background: rgba(20, 25, 40, 0.5);
+      backdrop-filter: blur(5px);
+      border-radius: 1.2rem;
+      padding: 1.2rem 1.5rem;
+    }
+
+    /* project cards */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+    .project-card {
+      background: rgba(12, 15, 25, 0.7);
+      backdrop-filter: blur(8px);
+      border-radius: 1.5rem;
+      padding: 1.5rem;
+      transition: all 0.25s ease;
+      cursor: pointer;
+      border: 1px solid rgba(79,70,229,0.2);
+    }
+    .project-card:hover {
+      transform: translateY(-8px);
+      border-color: #4f46e5;
+      box-shadow: 0 20px 30px -15px rgba(79,70,229,0.3);
+    }
+    /* modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.8);
+      backdrop-filter: blur(12px);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+    .modal-content {
+      max-width: 500px;
+      background: #0e1020;
+      border-radius: 2rem;
+      padding: 2rem;
+      border: 1px solid #4f46e5;
+    }
+
+    /* form */
+    .contact-form input, .contact-form textarea {
+      width: 100%;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(79,70,229,0.4);
+      border-radius: 1rem;
+      padding: 0.9rem 1.2rem;
+      color: white;
+      transition: 0.2s;
+    }
+    .contact-form input:focus, .contact-form textarea:focus {
+      outline: none;
+      border-color: #a78bfa;
+      box-shadow: 0 0 0 3px rgba(167,139,250,0.2);
+    }
+    .btn-glow {
+      background: linear-gradient(95deg, #4f46e5, #7c3aed);
+      border: none;
+      padding: 0.9rem 2rem;
+      border-radius: 2rem;
+      font-weight: 600;
+      transition: 0.2s;
+      cursor: pointer;
+    }
+    .btn-glow:hover {
+      transform: scale(1.02);
+      box-shadow: 0 8px 20px -6px #4f46e5;
+    }
+    .back-to-top {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: #4f46e5;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transition: 0.2s;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      z-index: 99;
+    }
+    .back-to-top.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      border-top: 1px solid rgba(79,70,229,0.25);
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { gap: 1rem; }
+      .glow-text { font-size: 2.4rem; }
+      .container { padding: 0 1.2rem; }
+      .hero { min-height: 80vh; }
+    }
+    .social-icons a {
+      font-size: 1.4rem;
+      margin: 0 0.75rem;
+      transition: 0.2s;
+      display: inline-block;
+    }
+    .social-icons a:hover { transform: translateY(-4px); color: #a78bfa; }
+  </style>
+</head>
+<body>
+<div class="progress-container"><div class="progress-bar" id="progressBar"></div></div>
+<nav>
+  <div class="nav-container">
+    <div class="logo">GNANESH<span style="color:#a78bfa;">.</span>DEV</div>
+    <ul class="nav-links">
+      <li><a href="#home" class="nav-link active">Home</a></li>
+      <li><a href="#about" class="nav-link">About</a></li>
+      <li><a href="#skills" class="nav-link">Skills</a></li>
+      <li><a href="#experience" class="nav-link">Exp & Edu</a></li>
+      <li><a href="#projects" class="nav-link">Projects</a></li>
+      <li><a href="#contact" class="nav-link">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="bg-motion"><span style="top:10%; left:-5%;"></span><span style="bottom:10%; right:-2%; animation-duration: 24s;"></span><span style="top:40%; left:70%; width:180px;"></span></div>
+
+<main>
+  <!-- Hero cinematic -->
+  <section id="home" class="hero">
+    <div class="container hero-content">
+      <span class="hero-badge"><i class="fas fa-code"></i> Python Full Stack | ML Enthusiast</span>
+      <div class="mt-4" style="margin-top: 1.5rem;">
+        <h1 class="glow-text">Gnanesh Kumar D.P</h1>
+        <div style="font-size: 1.8rem; margin: 0.8rem 0;">
+          <span id="typed-text"></span><span class="typed-cursor">|</span>
+        </div>
+        <p style="max-width: 600px; color: #cbd5e1;">Engineer crafting intelligent solutions · Python • Django • ML · turning ideas into scalable web experiences.</p>
+        <div style="margin-top: 2rem;">
+          <a href="#contact" class="btn-glow" style="display: inline-block; text-decoration: none; color:white;">Hire Me <i class="fas fa-arrow-right"></i></a>
+          <a href="#projects" style="margin-left: 1rem; color: #a78bfa;">Explore work →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About + base -->
+  <section id="about">
+    <div class="container">
+      <h2 class="section-title"><i class="fas fa-user-astronaut"></i> About Me</h2>
+      <div class="glass-card" style="padding: 2rem;">
+        <p style="font-size: 1.1rem;">I'm a B.E CSE student (2023-2026) with a diploma in Electronics & Communication, blending hardware intuition with full-stack development. Currently interning as Python Full Stack Developer at Qspiders, I build robust backends with Django and craft pixel-perfect frontends. I thrive on solving real-world problems — from lung cancer prediction using ML to dynamic web applications. Eager to contribute in a high-impact IT environment.</p>
+        <div style="display: flex; gap: 1rem; margin-top: 1.5rem; flex-wrap: wrap;">
+          <span><i class="fas fa-envelope"></i> gnaneshkumardp765@gmail.com</span>
+          <span><i class="fas fa-phone-alt"></i> +91 8867369834</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills animated -->
+  <section id="skills">
+    <div class="container">
+      <h2 class="section-title"><i class="fas fa-cogs"></i> Technical Arsenal</h2>
+      <div class="glass-card" style="padding: 2rem;">
+        <div class="skill-item"><div class="skill-info"><span>Python (Core, OOP)</span><span>90%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="90"></div></div></div>
+        <div class="skill-item"><div class="skill-info"><span>Django (MVT, REST)</span><span>82%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="82"></div></div></div>
+        <div class="skill-item"><div class="skill-info"><span>SQL (Joins, Window Functions)</span><span>85%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="85"></div></div></div>
+        <div class="skill-item"><div class="skill-info"><span>HTML5/CSS3/JS</span><span>88%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="88"></div></div></div>
+        <div class="skill-item"><div class="skill-info"><span>Machine Learning (Scikit-learn)</span><span>75%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="75"></div></div></div>
+        <div class="skill-item"><div class="skill-info"><span>Git & GitHub / VS Code</span><span>80%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="80"></div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience + Education timeline -->
+  <section id="experience">
+    <div class="container">
+      <h2 class="section-title"><i class="fas fa-briefcase"></i> Journey & Education</h2>
+      <div class="timeline">
+        <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><h3>🎓 B.E Computer Science</h3><p>Government Engineering College Kushalanagar · 2023-2026 | CGPA: 7.2</p></div></div>
+        <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><h3>📘 Diploma in ECE</h3><p>JSS Polytechnic, Nanjangud · 2021-2023 | CGPA: 8.5</p></div></div>
+        <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><h3>🏫 Secondary School (SSLC) </h3><p>Morarji Desai Residential School · 2015-2019 | 85%</p></div></div>
+        <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><h3>💼 Python Full Stack Intern</h3><p>Qspiders · Feb 2024 – Present | Django, REST APIs, MySQL, Git workflows</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects interactive cards + modal -->
+  <section id="projects">
+    <div class="container">
+      <h2 class="section-title"><i class="fas fa-laptop-code"></i> Cinematic Projects</h2>
+      <div class="projects-grid" id="projectsGrid"></div>
+    </div>
+  </section>
+
+  <!-- Contact + socials -->
+  <section id="contact">
+    <div class="container">
+      <h2 class="section-title"><i class="fas fa-paper-plane"></i> Connect</h2>
+      <div class="glass-card" style="padding: 2rem;">
+        <div class="contact-form">
+          <input type="text" placeholder="Your name" id="contactName"><br><br>
+          <input type="email" placeholder="Email address" id="contactEmail"><br><br>
+          <textarea rows="3" placeholder="Your message..." id="contactMsg"></textarea><br><br>
+          <button class="btn-glow" id="sendMsgBtn"><i class="fas fa-paper-plane"></i> Send Message (UI)</button>
+          <p id="formFeedback" style="margin-top: 1rem; font-size:0.85rem;"></p>
+        </div>
+        <div class="social-icons" style="margin-top: 2rem;">
+          <a href="#"><i class="fab fa-github"></i></a>
+          <a href="#"><i class="fab fa-linkedin"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="mailto:gnaneshkumardp765@gmail.com"><i class="fas fa-envelope"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<footer>
+  <p>© 2026 Gnanesh Kumar D.P — Built with cinematic code & passion <i class="fas fa-heart" style="color:#a78bfa;"></i></p>
+</footer>
+<div class="back-to-top" id="backToTop"><i class="fas fa-arrow-up"></i></div>
+
+<!-- Modal -->
+<div id="projectModal" class="modal">
+  <div class="modal-content">
+    <h3 id="modalTitle"></h3>
+    <p id="modalDesc"></p>
+    <button class="btn-glow" id="closeModal" style="margin-top:1rem;">Close</button>
+  </div>
+</div>
+
+<script>
+  // Typing effect
+  const roles = ["Python Full Stack Dev", "ML Enthusiast", "Django Craftsman", "Problem Solver"];
+  let idx = 0, charIdx = 0, isDeleting = false;
+  const typedSpan = document.getElementById("typed-text");
+  function typeEffect() {
+    const current = roles[idx];
+    if (isDeleting) {
+      typedSpan.innerText = current.substring(0, charIdx-1);
+      charIdx--;
+      if (charIdx === 0) { isDeleting = false; idx = (idx+1) % roles.length; setTimeout(typeEffect, 500); return; }
+    } else {
+      typedSpan.innerText = current.substring(0, charIdx+1);
+      charIdx++;
+      if (charIdx === current.length) { isDeleting = true; setTimeout(typeEffect, 1800); return; }
+    }
+    setTimeout(typeEffect, isDeleting ? 60 : 100);
+  }
+  typeEffect();
+
+  // scroll progress & active nav & intersection observer animations
+  const progressBar = document.getElementById('progressBar');
+  window.addEventListener('scroll', () => {
+    const winScroll = document.documentElement.scrollTop;
+    const height = document.documentElement.scrollHeight - window.innerHeight;
+    const scrolled = (winScroll / height) * 100;
+    progressBar.style.width = scrolled + "%";
+    // back to top
+    const backBtn = document.getElementById('backToTop');
+    if (winScroll > 600) backBtn.classList.add('show'); else backBtn.classList.remove('show');
+    // active nav
+    const sections = document.querySelectorAll('section');
+    let current = '';
+    sections.forEach(sec => {
+      const secTop = sec.offsetTop - 200;
+      if (winScroll >= secTop) current = sec.getAttribute('id');
+    });
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('href') === `#${current}`) link.classList.add('active');
+    });
+  });
+  document.getElementById('backToTop').addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+
+  // skill bars observer
+  const skillBars = document.querySelectorAll('.skill-bar-fill');
+  const observerSkills = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const width = entry.target.getAttribute('data-width');
+        entry.target.style.width = width + '%';
+        observerSkills.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  skillBars.forEach(bar => observerSkills.observe(bar));
+
+  // Projects data
+  const projectsData = [
+    { title: "Lung Cancer Prediction ML", desc: "Built ML model using Random Forest & Logistic Regression analyzing patient health indicators. Achieved 89% accuracy. Performed feature engineering, data preprocessing, and evaluation metrics (precision, recall).", tech: "Python, Scikit-learn, Pandas" },
+    { title: "Django Blog Platform", desc: "Full-stack blog with authentication, CRUD operations, and dynamic templates using MVT architecture. Integrated MySQL database & responsive UI.", tech: "Django, HTML/CSS, JS, MySQL" },
+    { title: "Portfolio 3.0 (cinematic)", desc: "This interactive portfolio — glassmorphism, timeline, animated skills, modal interactions. Fully responsive, Intersection Observer driven.", tech: "HTML5, CSS3, vanilla JS" }
+  ];
+  const grid = document.getElementById('projectsGrid');
+  projectsData.forEach(proj => {
+    const card = document.createElement('div');
+    card.className = 'project-card';
+    card.innerHTML = `<h3><i class="fas fa-microchip"></i> ${proj.title}</h3><p style="margin:0.7rem 0">${proj.desc.substring(0,80)}...</p><small style="color:#a78bfa;">${proj.tech}</small><div style="margin-top:1rem;"><span style="cursor:pointer; color:#c084fc;">↗ Explore</span></div>`;
+    card.addEventListener('click', () => {
+      document.getElementById('modalTitle').innerText = proj.title;
+      document.getElementById('modalDesc').innerHTML = `<strong>${proj.desc}</strong><br><br>🛠️ Tech stack: ${proj.tech}`;
+      document.getElementById('projectModal').style.display = 'flex';
+    });
+    grid.appendChild(card);
+  });
+  document.getElementById('closeModal').addEventListener('click', () => document.getElementById('projectModal').style.display = 'none');
+  window.addEventListener('click', (e) => { if(e.target === document.getElementById('projectModal')) document.getElementById('projectModal').style.display = 'none'; });
+
+  // Contact UI simulation
+  document.getElementById('sendMsgBtn').addEventListener('click', () => {
+    const name = document.getElementById('contactName').value;
+    const email = document.getElementById('contactEmail').value;
+    const msg = document.getElementById('contactMsg').value;
+    if(!name || !email || !msg) document.getElementById('formFeedback').innerHTML = '<span style="color:#f87171;">✨ Please fill all fields (demo UI)</span>';
+    else document.getElementById('formFeedback').innerHTML = '<span style="color:#6ee7b7;">✓ Message sent! (demo) Gnanesh will reach out soon.</span>';
+    setTimeout(() => document.getElementById('formFeedback').innerHTML = '', 2500);
+  });
+
+  // parallax motion effect on background shapes (smooth)
+  document.addEventListener('mousemove', (e) => {
+    const moveX = (e.clientX - window.innerWidth/2) * 0.005;
+    const moveY = (e.clientY - window.innerHeight/2) * 0.005;
+    document.querySelectorAll('.bg-motion span').forEach((el, i) => {
+      el.style.transform = `translate(${moveX * (i+1)}px, ${moveY * (i+1)}px)`;
+    });
+  });
+</script>
+</body>
+</html>
