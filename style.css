@@ -260,3 +260,279 @@ section{
     color:#4f46e5;
     margin-right:10px;
 }
+/* ===========================
+   Skills
+=========================== */
+
+.skills{
+    background:#ffffff;
+}
+
+.skills-container{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:25px;
+}
+
+.skill-box{
+    background:#fff;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+    transition:.3s;
+}
+
+.skill-box:hover{
+    transform:translateY(-8px);
+}
+
+.skill-box h3{
+    margin-bottom:15px;
+    color:#4f46e5;
+}
+
+.progress{
+    width:100%;
+    height:10px;
+    background:#e5e7eb;
+    border-radius:20px;
+    overflow:hidden;
+    margin-bottom:10px;
+}
+
+.progress span{
+    display:block;
+    height:100%;
+    background:linear-gradient(to right,#4f46e5,#7c3aed);
+}
+
+/* ===========================
+   Experience
+=========================== */
+
+.timeline{
+    border-left:4px solid #4f46e5;
+    margin-left:20px;
+}
+
+.timeline-item{
+    margin-bottom:30px;
+    position:relative;
+}
+
+.timeline-item::before{
+    content:"";
+    position:absolute;
+    left:-32px;
+    top:15px;
+    width:18px;
+    height:18px;
+    background:#4f46e5;
+    border-radius:50%;
+}
+
+.timeline-content{
+    background:#fff;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+}
+
+.timeline-content h3{
+    color:#4f46e5;
+}
+
+.timeline-content h4{
+    margin:8px 0;
+}
+
+.timeline-content span{
+    color:#64748b;
+    font-size:15px;
+}
+
+/* ===========================
+   Projects
+=========================== */
+
+.projects{
+    background:#f8fafc;
+}
+
+.projects-container{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:30px;
+}
+
+.project-card{
+    background:#fff;
+    padding:30px;
+    border-radius:15px;
+    text-align:center;
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+    transition:.3s;
+}
+
+.project-card:hover{
+    transform:translateY(-10px);
+}
+
+.project-card i{
+    font-size:50px;
+    color:#4f46e5;
+    margin-bottom:20px;
+}
+
+.project-card h3{
+    margin-bottom:15px;
+}
+
+.project-card p{
+    color:#64748b;
+    margin-bottom:25px;
+}
+
+/* ===========================
+   Contact
+=========================== */
+
+.contact form{
+    max-width:700px;
+    margin:auto;
+}
+
+.contact input,
+.contact textarea{
+    width:100%;
+    padding:15px;
+    margin-bottom:20px;
+    border:1px solid #d1d5db;
+    border-radius:10px;
+    outline:none;
+    font-size:16px;
+}
+
+.contact input:focus,
+.contact textarea:focus{
+    border-color:#4f46e5;
+}
+
+.contact textarea{
+    resize:none;
+}
+
+/* ===========================
+   Footer
+=========================== */
+
+.footer{
+    background:#fff;
+    padding:25px;
+    text-align:center;
+    border-top:1px solid #e5e7eb;
+}
+
+.footer p{
+    color:#64748b;
+}
+
+/* ===========================
+   Responsive
+=========================== */
+
+@media(max-width:992px){
+
+.header{
+    padding:18px 5%;
+}
+
+section{
+    padding:80px 5%;
+}
+
+.home{
+    flex-direction:column-reverse;
+    text-align:center;
+}
+
+.about{
+    flex-direction:column;
+    text-align:center;
+}
+
+.buttons{
+    justify-content:center;
+}
+
+.social-icons{
+    justify-content:center;
+}
+
+.home-image img,
+.about-image img{
+    width:280px;
+    height:280px;
+}
+
+}
+
+@media(max-width:768px){
+
+.navbar{
+    display:none;
+}
+
+.home-content h1{
+    font-size:42px;
+}
+
+.home-content h2{
+    font-size:24px;
+}
+
+.heading{
+    font-size:34px;
+}
+
+.projects-container,
+.skills-container{
+    grid-template-columns:1fr;
+}
+
+.timeline{
+    margin-left:10px;
+}
+
+}
+
+@media(max-width:480px){
+
+.home-content h1{
+    font-size:34px;
+}
+
+.home-content h3{
+    font-size:22px;
+}
+
+.home-content p{
+    font-size:15px;
+}
+
+.btn{
+    width:100%;
+    text-align:center;
+}
+
+.buttons{
+    flex-direction:column;
+}
+
+.home-image img,
+.about-image img{
+    width:220px;
+    height:220px;
+}
+
+}
